@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day 1 23.02.19 (JS Bubble Sort)</title>
+</head>
+<body>
+  <div id="sort-res"></div>
+  <div id="after-sort"></div>
+</body>
+<script type="text/javascript">
+  // Good example: https://www.youtube.com/watch?v=nmhjrI-aW5o
+  /*
+  I:0{
+    if(arr[0] > arr[1]) {0 <-> 1} else {do nothing}
+    if(arr[1] > arr[2]) {1 <-> 2} else {do nothing}
+    ...
+    if(arr[n-1] > arr[n]) {n-1 <->n} else {do nothing}
+  }
+  I:1{
+    if(arr[0] > arr[1]) {0 <-> 1} else {do nothing}
+    if(arr[1] > arr[2]) {1 <-> 2} else {do nothing}
+    ...
+    if(arr[n-2] > arr[n-1]) {n-2 <->n-1} else {do nothing}
+  }
+  ...
+  I:n-1{
+    if(arr[0] > arr[1]) {0 <-> 1} else {do nothing}
+  }
+  */
+
+  /* Execute on Load of Page */
+  document.addEventListener("DOMContentLoaded", function(){
+    var arr = randArr(1, 30, 10);
+
+    show(arr, "sort-res");
+    bubSort(arr);
+  });
+
+  /* Generate Rand Integer Array */
+  function randArr(minInt, maxInt, arrLength) {
+    var min = Math.floor(minInt);
+    var max = Math.floor(maxInt);
+    var len = Math.floor(arrLength);
+    var arr = [];
+
+    for(var i = 0; i <= len-1; i++) {
+      arr[i] = Math.floor(Math.random() * (max - min) + min);
+    }
+
+    return arr;
+  }
+
+  /* Script Just to Show Array */
+  function show(arr, place){
+    var test = "";
+    for(var i = 0; i <= arr.length-1; i++) {
+      if(i != arr.length-1) {
+        test += arr[i]+", ";
+      } else {
+        test += arr[i];
+      }
+    }
+    document.getElementById(place).innerHTML = test;
+  }
+
+  /* Script Bubble Sort */
+  function bubSort(arr){
+    var test = "";
+    for(var i = 0; i <= arr.length-1; i++) {
+      for(var j = 1; j <= arr.length - i; j++) {
+        if(arr[j-1] > arr[j]) {
+          var b = arr[j-1];
+          arr[j-1] = arr[j];
+          arr[j] = b;
+        }
+      }
+    }
+    show(arr, "after-sort");
+  }
+</script>
+</html>
